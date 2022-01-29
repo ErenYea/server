@@ -4,25 +4,28 @@ var path = require('path');
 const cors = require('cors')
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var aboutuserRouter = require('./routes/aboutus')
 
 var app = express();
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('view engine', 'jade');
 
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/data', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
+app.use('/about', aboutuserRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
