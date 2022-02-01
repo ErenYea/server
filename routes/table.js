@@ -37,9 +37,9 @@ router.get('/',(req, res, next)=>{
       var tablenames = [];
       var data = [];
       var array_of_table = await gettablenames();
-      if(req.cookies.user!='admin'){
-        array_of_table.pop();
-      }
+      // if(req.cookies.user!='admin'){
+      //   array_of_table.pop();
+      // }
       for (element of array_of_table) {
         for (key in element) {
           tablenames.push(element[key]);
@@ -55,6 +55,7 @@ router.get('/',(req, res, next)=>{
       var newarr = await allfunct();
       var tablenames = newarr[0];
       var data = newarr[1];
+      console.log(data);
       res.send([{data: data}, {tablenames: tablenames}])
     };
     start();
